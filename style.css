@@ -1,17 +1,37 @@
 #board {
  display: grid;
- grid-template-columns: repeat(3, 250px);
- grid-template-rows: repeat(3, 250px);
+ grid-template-columns: repeat(3, 20vh);
+ grid-template-rows: repeat(3, 20vh);
  place-content: center;
 }
 
 
 .cell {
     border: 1px solid;
-    line-height: 250px;
-    font-size: 10em;
+    font-size: 20vh;
+    
 }
 
 #main-container {
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    #board {
+        display: grid;
+        grid-template-columns: repeat(3, 20vw);
+        grid-template-rows: repeat(3, 20vw);
+        place-content: center;
+       }
+       
+       
+       .cell {
+           border: 1px solid;
+           font-size: 20vw;
+           
+       }
+       
+       #main-container {
+           text-align: center;
+       }
 }
