@@ -19,15 +19,15 @@
 @media (max-width: 600px) {
     #board {
         display: grid;
-        grid-template-columns: repeat(3, 20vw);
-        grid-template-rows: repeat(3, 20vw);
+        grid-template-columns: repeat(3, 30vw);
+        grid-template-rows: repeat(3, 30vw);
         place-content: center;
        }
        
        
        .cell {
            border: 1px solid;
-           font-size: 20vw;
+           font-size: 30vw;
            
        }
        
