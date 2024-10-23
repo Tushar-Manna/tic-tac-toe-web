@@ -47,18 +47,15 @@ function render(id) {
 
 
 function wincheck(arr, name) {
-    if (player1.length >= 3) {
+    if (arr.length >= 3) {
         for (const winarr of win) {
             const isWinning = winarr.every(element => arr.includes(element));
 
             if (isWinning) {
-                
-                setTimeout(function() {
-                    heading.textContent = `${name} Won, Reset Board to Play Another Game!`
-                    alert(`${name} Won!`);
-                }, 100);
                 someonewon=true;
-                break; 
+                setTimeout(() => heading.textContent = `${name} Won, Reset Board to Play Another Game!`, 300
+                )
+                break;
             }
             
             
@@ -89,11 +86,7 @@ gridItems.forEach ((item) => {
             play(item.id);
             render(item.id);
             if (counter >= 9 && !someonewon) {
-                
-                setTimeout(function() {
-                    alert(`Game Over`);
-                    heading.textContent = `Game Over, Reset Board to Play Another Game!`
-                }, 100);
+                heading.textContent = `Game Over, Reset Board to Play Another Game!`
             }
             
         }
