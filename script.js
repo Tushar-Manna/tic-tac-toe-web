@@ -40,7 +40,7 @@ function render(id) {
 
     if (!cell.classList.contains('clicked')) {
         cell.textContent = counter % 2 === 0 ? 'X': 'O';
-        heading.textContent = counter % 2 === 0  ? "X's Turn": "O's Turn";
+        heading.textContent = counter % 2 === 0  ? "O's Turn": "X's Turn";
         cell.classList.add('clicked')
     }
 }
