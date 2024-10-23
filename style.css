@@ -1,0 +1,17 @@
+#board {
+ display: grid;
+ grid-template-columns: repeat(3, 10em);
+ grid-template-rows: repeat(3, 10em);
+ place-content: center;
+}
+
+
+.cell {
+    border: 1px solid;
+    line-height: 250px;
+    font-size: 10em;
+}
+
+#main-container {
+    text-align: center;
+}

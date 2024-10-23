@@ -9,27 +9,96 @@ const win = [
     [1, 5, 9]
 ]
 
+let counter = 0;
+let player1 = [] ;
+let player2 = [];
+const gridItems = document.querySelectorAll('.cell');
+clickedCells = {};
+let someonewon = false;
+const heading = document.getElementById('turn')
 
-let player1 = []
-let player2 = []
 
-
-
-function wincheck(winarray, arr) {
-    const sortedArr = arr.sort((a, b) => a - b).slice(0,3);
-
-
-    winarray.forEach(win => {
-        if (win.every(val => sortedArr.includes(val))) {
-            console.log("you won");
+function play (pos) {
+    const position = Number(pos);
+    if (!clickedCells[position]) {
+        if (counter % 2 === 0) {
+            player1.push(position)
+            wincheck(player1, "O")
         }
+        else {player2.push(position)
+            wincheck(player2, "X")
+        }
+        counter++
     }
-    )
+    clickedCells[position] = true;
+    
+}
 
-    if (arr.length >= 5 ) {
-        console.log("game over")
+function render(id) {
+    const cell = document.getElementById(id)
+    
+
+    if (!cell.classList.contains('clicked')) {
+        cell.textContent = counter % 2 === 0 ? 'X': 'O';
+        heading.textContent = counter % 2 === 0  ? "X's Turn": "O's Turn";
+        cell.classList.add('clicked')
     }
 }
 
 
-wincheck(win, player1)
+function wincheck(arr, name) {
+    if (player1.length >= 3) {
+        for (const winarr of win) {
+            const isWinning = winarr.every(element => arr.includes(element));
+
+            if (isWinning) {
+                
+                setTimeout(function() {
+                    heading.textContent = `${name} Won, Reset Board to Play Another Game!`
+                    alert(`${name} Won!`);
+                }, 100);
+                someonewon=true;
+                break; 
+            }
+            
+            
+        }
+    }
+}
+
+
+function reset() {
+    counter = 0;
+    player1.length=0;
+    player2.length=0;
+    clickedCells = {};
+    someonewon=false;
+    heading.textContent = `O's Turn`
+    gridItems.forEach (cell => {
+        cell.textContent='';
+        cell.classList.remove('clicked')
+        cell.style.pointerEvents = ''; //yeah I apply good practices!
+    })
+}
+
+
+
+gridItems.forEach ((item) => {
+    item.addEventListener('click', function() {
+        if (!clickedCells[item.id] && !someonewon) {
+            play(item.id);
+            render(item.id);
+            if (counter >= 9 && !someonewon) {
+                
+                setTimeout(function() {
+                    alert(`Game Over`);
+                    heading.textContent = `Game Over, Reset Board to Play Another Game!`
+                }, 100);
+            }
+            
+        }
+        
+    })
+});
+
+document.getElementById('reset').addEventListener('click', reset)
